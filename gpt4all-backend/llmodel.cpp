@@ -103,13 +103,11 @@ const std::vector<LLModel::Implementation> &LLModel::Implementation::implementat
                     if (!std::regex_search(p.stem().string(), re)) continue;
 
                     // Add to list if model implementation
-                    try {
-                        Dlhandle dl(p.string());
-                        if (!Implementation::isImplementation(dl)) {
-                            continue;
-                        }
-                        fres.emplace_back(Implementation(std::move(dl)));
-                    } catch (...) {}
+                    Dlhandle dl(p.string());
+                    if (!Implementation::isImplementation(dl)) {
+                        continue;
+                    }
+                    fres.emplace_back(Implementation(std::move(dl)));
                 }
             }
         };
